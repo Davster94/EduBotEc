@@ -19,7 +19,7 @@ lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('intents.json').read())
 
 # Descarga de datos necesarios para NLTK
-nltk.download('punkt_tab') # Tokenizador de palabras
+nltk.download('punkt') # Tokenizador de palabras
 nltk.download('wordnet') # Diccionario de palabras para lematización
 nltk.download('omw-1.4') # Datos adicionales para lematización
 
@@ -78,9 +78,9 @@ train_y = list(training[:,1]) # Salidas (intenciones)
 # Se crea la red neuronal con Keras 
 model = Sequential() # Modelo secuencial (capa por capa)
 model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu')) # Capa oculta con 128 neuronas y activación Relu
-model.add(Dropout(0,5))  # Para evitar sobreajuste (50% de neuronas desactivadas en cada iteración)
+model.add(Dropout(0.5))  # Para evitar sobreajuste (50% de neuronas desactivadas en cada iteración)
 model.add(Dense(64, activation='relu')) # Segunda capa oculta con 64 neuronas y ReLU
-model.add(Dropout(0,5))
+model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation='softmax')) # Capa de salida con activación Softmax para clasificación
 
 # Configuración del optimizador Stochastic Gradient Descent
