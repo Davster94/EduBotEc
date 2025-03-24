@@ -8,9 +8,9 @@ import numpy as np # Para trabajar con arreglos y cálculos matemáticos
 import nltk
 from nltk.stem  import WordNetLemmatizer
 
-from tensorflow.keras.models import Sequential # Para crear un modelo secuencial
-from tensorflow.keras.layers import Dense, Dropout # Capas de la red neuronal
-from tensorflow.keras.optimizers import SGD #O ptimizador Stochastic Gradient Descent
+from keras.models import Sequential # Para crear un modelo secuencial
+from keras.layers import Dense, Dropout # Capas de la red neuronal
+from keras.optimizers import SGD #O ptimizador Stochastic Gradient Descent
 
 # Inicializamos el lematizador
 lemmatizer = WordNetLemmatizer()
@@ -67,21 +67,27 @@ for document in documents:
 
 # Se mezclan los datos de entrenamiento para evitar sesgos
 random.shuffle(training) 
-# Se convierte la lista en un array de NumPy
-training = np.array(training, dtype=object)
+
 print(training)
 
 # Se dividen los datos en entrada (x) y salida (y)
-train_x = list(training[:,0]) # Entradas (Maleta de palabras)
-train_y = list(training[:,1]) # Salidas (intenciones)
+train_x = [] # Entradas (Maleta de palabras)
+train_y = [] # Salidas (intenciones)
+
+for i in training: #Recorrido por cada par de la lista training
+    train_x.append(i[0]) #Agrega y guarda la entrada
+    train_y.append(i[1]) #Agrega y guarda la saldia esperada
+
+train_x = np.array(train_x) #Convierte la lista en arreglo numpy para mejorar calculo en Tensorflow
+train_y = np.array(train_y) #Convierte la lista en arreglo numpy para que el modelo pueda usarlo en el entrenamiento 
 
 # Se crea la red neuronal con Keras 
 model = Sequential() # Modelo secuencial (capa por capa)
-model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu')) # Capa oculta con 128 neuronas y activación Relu
-model.add(Dropout(0.5))  # Para evitar sobreajuste (50% de neuronas desactivadas en cada iteración)
-model.add(Dense(64, activation='relu')) # Segunda capa oculta con 64 neuronas y ReLU
-model.add(Dropout(0.5))
-model.add(Dense(len(train_y[0]), activation='softmax')) # Capa de salida con activación Softmax para clasificación
+model.add(Dense(128, input_shape=(len(train_x[0]),), name="inp_layer",activation='relu')) # Capa oculta con 128 neuronas y activación Relu
+model.add(Dropout(0.5, name="hidden_layer1"))  # Para evitar sobreajuste (50% de neuronas desactivadas en cada iteración)
+model.add(Dense(64, name="hidden_layer2",activation='relu')) # Segunda capa oculta con 64 neuronas y ReLU
+model.add(Dropout(0.5, name="hidden_layer3"))
+model.add(Dense(len(train_y[0]), name="output_layer",activation='softmax')) # Capa de salida con activación Softmax para clasificación
 
 # Configuración del optimizador Stochastic Gradient Descent
 sgd = SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov= True)
@@ -90,7 +96,7 @@ sgd = SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov= True)
 model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics = ['accuracy'])
 
 # Entrenamiento del modelo con 100 épocas y lotes de tamaño 5
-train_process = model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
+model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
 
 #Guardar el modelo entrenado en eun archivo . keras
-model.save("chatbot_model.keras", train_process)
+model.save("chatbot_model.keras")
