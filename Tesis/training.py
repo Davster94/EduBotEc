@@ -1,102 +1,84 @@
-# Importamos las librerías necesarias
-import random # Para mezclar datos aleatoriamente
-import json # Para manejar archivos JSON
-import pickle # PAra guardar y cargar objetos en archivos
-import numpy as np # Para trabajar con arreglos y cálculos matemáticos
+import random
+import json
+import pickle
+import numpy as np
 
-#Importar Natural Language ToolKit para procesamiento de texto
 import nltk
-from nltk.stem  import WordNetLemmatizer
+from nltk.stem import WordNetLemmatizer #Para pasar las palabras a su forma raíz
 
-from keras.models import Sequential # Para crear un modelo secuencial
-from keras.layers import Dense, Dropout # Capas de la red neuronal
-from keras.optimizers import SGD #O ptimizador Stochastic Gradient Descent
+#Para no mostrar aviso de optimizaciones de oneDNN para mejorar rendimiento
+import os
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
-# Inicializamos el lematizador
+#Para crear la red neuronal
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Activation, Dropout
+from keras.optimizers import SGD
+
 lemmatizer = WordNetLemmatizer()
 
-# Se carga el archivo JSON con las intenciones del chatbot
 intents = json.loads(open('intents.json').read())
 
-# Descarga de datos necesarios para NLTK
-nltk.download('punkt') # Tokenizador de palabras
-nltk.download('wordnet') # Diccionario de palabras para lematización
-nltk.download('omw-1.4') # Datos adicionales para lematización
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 
-# Inicializa las listas para almacenar la infotmación
-words = [] # Lista de palabras únicas
-classes = [] # Lista de categorías o intenciones
-documents= [] # Lista de pares (frase, intención)
-ignore_letters = ['?','¿','!','¡','.',','] # Caracteres que se van a ignorar
+words = []
+classes = []
+documents = []
+ignore_letters = ['?', '!', '¿', '.', ',']
 
-# Procesamiento de los datos del archivo intents.json
-for intent in intents ['intents']: # Recorre cada intención
-    for pattern in intent['patterns']: # Recorre cada frase 
-        word_list = nltk.word_tokenize(pattern) # Separamos las palabras
-        words.extend(word_list) # Se agrega las palabras a la lista de palabras
-        documents.append((word_list, intent["tag"])) # Se guarda la relación frase-intención
-        if intent["tag"] not in classes: # Si la intención no está en la lista, es agregada
+#Clasifica los patrones y las categorías
+for intent in intents['intents']:
+    for pattern in intent['patterns']:
+        word_list = nltk.word_tokenize(pattern)
+        words.extend(word_list)
+        documents.append((word_list, intent["tag"]))
+        if intent["tag"] not in classes:
             classes.append(intent["tag"])
 
-# Se lematiza y limpia las palabras, eliminando los duplicados
 words = [lemmatizer.lemmatize(word) for word in words if word not in ignore_letters]
-words = sorted(set(words)) # Se eliminan los duplicados y se ordenan alfabéticamente
+words = sorted(set(words))
 
-# Se guardan las palabras y clases en archivos para se utilizados más adelante
-pickle.dump(words, open('words.pkl','wb')) # Para guardar las palabras
-pickle.dump(classes, open('classes.pkl','wb')) # Para guardar las clases
+pickle.dump(words, open('words.pkl', 'wb'))
+pickle.dump(classes, open('classes.pkl', 'wb'))
 
-# Se preparan los datos para entrenar la red neuronal
-training= [] # Lista para almacenar los datos de entrenamiento
-output_empty = [0]*len(classes) # Vector de salida de ceros (para clasificación)
-
-# Se convierten los datos en una "maleta de palabras"
+#Pasa la información a unos y ceros según las palabras presentes en cada categoría para hacer el entrenamiento
+training = []
+output_empty = [0]*len(classes)
 for document in documents:
-    bag = []  # Creación de un vector para representar la frase
-    word_patterns = document[0]  # Extracción de las palabras de la frase
-    word_patterns = [lemmatizer.lemmatize(word.lower()) for word in word_patterns] # Lematiza
-     # Se llena el vector de la "maleta de palabras"
+    bag = []
+    word_patterns = document[0]
+    word_patterns = [lemmatizer.lemmatize(word.lower()) for word in word_patterns]
     for word in words:
-        bag.append(1) if word in word_patterns else bag.append(0) # El 1 si se encuentra la palabra en la frase, si no 0
-
-    # Se crea la salida esperada es decir categoria/intención
+        bag.append(1) if word in word_patterns else bag.append(0)
     output_row = list(output_empty)
-    output_row[classes.index(document[1])] = 1 # Se pone un 1 en la posición de la intención correspondiente
+    output_row[classes.index(document[1])] = 1
+    training.append([bag, output_row])
+random.shuffle(training)
+print(len(training)) 
+train_x=[]
+train_y=[]
+for i in training:
+    train_x.append(i[0])
+    train_y.append(i[1])
 
-    training.append([bag,output_row])  # Se agrega los datos al conjunto de entrenamiento
+train_x = np.array(train_x) 
+train_y = np.array(train_y)
 
-# Se mezclan los datos de entrenamiento para evitar sesgos
-random.shuffle(training) 
-
-print(training)
-
-# Se dividen los datos en entrada (x) y salida (y)
-train_x = [] # Entradas (Maleta de palabras)
-train_y = [] # Salidas (intenciones)
-
-for i in training: #Recorrido por cada par de la lista training
-    train_x.append(i[0]) #Agrega y guarda la entrada
-    train_y.append(i[1]) #Agrega y guarda la saldia esperada
-
-train_x = np.array(train_x) #Convierte la lista en arreglo numpy para mejorar calculo en Tensorflow
-train_y = np.array(train_y) #Convierte la lista en arreglo numpy para que el modelo pueda usarlo en el entrenamiento 
-
-# Se crea la red neuronal con Keras 
-model = Sequential() # Modelo secuencial (capa por capa)
-model.add(Dense(128, input_shape=(len(train_x[0]),), name="inp_layer",activation='relu')) # Capa oculta con 128 neuronas y activación Relu
-model.add(Dropout(0.5, name="hidden_layer1"))  # Para evitar sobreajuste (50% de neuronas desactivadas en cada iteración)
-model.add(Dense(64, name="hidden_layer2",activation='relu')) # Segunda capa oculta con 64 neuronas y ReLU
+#Creamos la red neuronal
+model = Sequential()
+model.add(Dense(128, input_shape=(len(train_x[0]),), name="inp_layer", activation='relu'))
+model.add(Dropout(0.5, name="hidden_layer1"))
+model.add(Dense(64, name="hidden_layer2", activation='relu'))
 model.add(Dropout(0.5, name="hidden_layer3"))
-model.add(Dense(len(train_y[0]), name="output_layer",activation='softmax')) # Capa de salida con activación Softmax para clasificación
+model.add(Dense(len(train_y[0]), name="output_layer", activation='softmax'))
 
-# Configuración del optimizador Stochastic Gradient Descent
-sgd = SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov= True)
-
-# Compilación del modelo con función de perdida para clasificación multiclase
+#Creamos el optimizador y lo compilamos
+sgd = SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics = ['accuracy'])
 
-# Entrenamiento del modelo con 100 épocas y lotes de tamaño 5
+#Entrenamos el modelo y lo guardamos
 model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
-
-#Guardar el modelo entrenado en eun archivo . keras
-model.save("chatbot_model.keras")
+model.save("chatbot_model.h5")
