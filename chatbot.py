@@ -10,7 +10,7 @@ from nltk.stem import WordNetLemmatizer  # Para reducir las palabras a su forma 
 
 # Importamos Keras para cargar el modelo de IA previamente entrenado
 import keras
-from keras.models import load_model  
+from keras.saving import load_model  
 
 # Inicializamos el lematizador
 lemmatizer = WordNetLemmatizer()
