@@ -10,6 +10,18 @@ from nltk.stem import WordNetLemmatizer #Para pasar las palabras a su forma raí
 import os
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
+#Para verificar si los datos se cargan correctamente
+import json
+
+with open('intents.json', encoding='utf-8') as file:
+    data = json.load(file)
+
+for intent in data["intents"]:
+    print(f"Tag: {intent['tag']}")
+    print(f"Patterns: {intent['patterns']}")
+    print(f"Responses: {intent['responses']}")
+    print("-" * 50)
+
 #Para crear la red neuronal
 import keras
 from keras.models import Sequential
@@ -81,4 +93,4 @@ model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics = ['accu
 
 #Entrenamos el modelo y lo guardamos
 model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=5, verbose=1)
-model.save("chatbot_model.h5")
+model.save("chatbot_model.keras")

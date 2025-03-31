@@ -19,7 +19,7 @@ lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('intents.json').read())  # Archivo JSON con las intenciones del chatbot
 words = pickle.load(open('words.pkl', 'rb'))  # Lista de palabras procesadas en el entrenamiento
 classes = pickle.load(open('classes.pkl', 'rb'))  # Lista de clases o intenciones posibles
-model = load_model('chatbot_model.h5')  # Cargamos el modelo de red neuronal previamente entrenado
+model = load_model('chatbot_model.keras')  # Cargamos el modelo de red neuronal previamente entrenado
 
 # Función para preprocesar una oración ingresada por el usuario
 def clean_up_sentence(sentence):
