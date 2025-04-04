@@ -2,47 +2,228 @@
     "intents":[
         {
             "tag": "saludo",
-            "patterns":["hola","Hola","buenos días","buenas tardes","buenas noches","como estás","ayudame con","saludos","ola","holi","hello"],
-            "responses": ["Bienvenido! Como puedo ayudarte","Hola, como puedo ayudarte?","Será un gusto ayudarte con la información que necesites"]
+            "patterns":["hola","Hola","buenos días","buenas tardes","buenas noches","como estás","ayudame con","saludos","ola","holi","hello","qué tal", "hey", "buen día", "saluditos"],
+            "responses": ["Bienvenido! Soy EduBotEc, como puedo ayudarte","Hola, como puedo ayudarte?","Será un gusto ayudarte con la información que necesites"]
         },
         {
             "tag": "nombre",
-            "patterns": ["como te llamas","cual es tu nombre"],
-            "responses":["Hola, mi nombre es EduBotEc"]
+            "patterns": ["como te llamas","cual es tu nombre","¿Cómo te llamas?", "cual es tu nombre", "¿Cuál es tu nombre?","cómo es tu nombre", "dime tu nombre", "cuál es tu identidad"],
+            "responses":["Hola, mi nombre es EduBotEc, como puedo ayudarte?"]
         },
         {
             "tag":"despedida",
-            "patterns":["adios","hasta luego","hasta pronto"],
-            "responses":["Espero verte pronto para aprender más sobre historia"]
+            "patterns":["adios","hasta luego","hasta pronto", "nos vemos", "chau", "me voy", "bye", "hasta la próxima"],
+            "responses":["Espero verte pronto para aprender más sobre historia", "¡Hasta la próxima! Sigue aprendiendo sobre nuestro pasado."]
         },
         {
-            "tag":"agradeciiento",
-            "patterns":["gracias","muchas gracias","te lo agradezco","agradecido"],
+            "tag":"agradecimiento",
+            "patterns":["gracias","muchas gracias","te lo agradezco","agradecido", "muy amable", "mil gracias", "te agradezco mucho"],
             "responses":["Estoy aqui para ayudarte","Es un gusto, poder ayudarte"]
         },
         {
             "tag":"simon_bolivar",
-            "patterns":["quién fue simon bolivar", "háblame de simon bolivar", "simon bolivar historia"],
-            "responses":["Simón Bolívar, conocido como 'El Libertador', fue un líder militar y político que jugó un papel fundamental en la independencia de varios países de América del Sur, incluido Ecuador.",
-        "Bolívar lideró campañas que liberaron a Venezuela, Colombia, Ecuador, Perú y Bolivia del dominio español. Su visión era la unión de los países latinoamericanos bajo una gran nación."]
+            "patterns":["quién fue simon bolivar", "háblame de simon bolivar", "simon bolivar historia", "libertador de Ecuador", "biografía de Simón Bolívar", "qué hizo Simón Bolívar", "datos de Simón Bolívar","quien fue bolivar"],
+            "responses":["Simón Bolívar, conocido como 'El Libertador', fue un líder militar y político que nació el 24 de julio de 1783 en Carcas, Venezuela, jugando un papel fundamental en la independencia de varios países de América del Sur, incluido Ecuador. Bolívar lideró campañas que liberaron a Venezuela, Colombia, Ecuador, Perú y Bolivia del dominio español. Su visión era la unión de los países latinoamericanos bajo una gran nación. Falleció el 17 de diciembre de 1830 en Santa Marta, Colombia."]
+        },
+        {
+            "tag": "fecha_nacimiento_simon_bolivar",
+            "patterns": ["¿cuándo nació Simón Bolívar?", "fecha de nacimiento de Simón Bolívar", "¿en qué año nació Bolívar?","nacimiento Bolivar","cuando nacio simon bolivar"],
+            "responses": ["Simón Bolívar nació el 24 de julio de 1783 en Caracas, Venezuela."]
+        },
+        {
+            "tag":"batallas_simon_bolivar",
+            "patterns":["batallas Simon Bolivar","en que batallas participo Simon Bolivar"],
+            "responses":["Campaña de Quito (1822): Simón Bolívar lideró la Batalla de Pichincha bajo su mando, aun cuando no participó directamente, la campaña fue parte de su estrategia general. Batalla de Huachi (1821): Aunque fue una derrota para los independentistas, forma parte de la campaña en el territorio ecuatoriano."]
+        },
+        {
+            "tag": "fecha_fallecimiento_simon_bolivar",
+            "patterns": ["¿cuándo murió Simón Bolívar?", "fecha de fallecimiento de Simón Bolívar", "¿en qué año murió Bolívar?"],
+            "responses": ["Simón Bolívar falleció el 17 de diciembre de 1830 en Santa Marta, Colombia."]
+        },
+        {
+            "tag": "formacion_simon_bolivar",
+            "patterns": ["¿dónde estudió Simón Bolívar?", "educación de Simón Bolívar", "formación académica de Bolívar","formación de simon bolivar"],
+            "responses": ["Simón Bolívar recibió educación en Caracas y posteriormente estudió en España, donde fue influenciado por ideas ilustradas."]
+        },
+        {
+            "tag": "profesion_bolivar",
+            "patterns": ["cuál era la profesión de Simón Bolívar?", "qué hacía Simón Bolívar?", "ocupación de Bolívar"],
+            "responses": ["Simón Bolívar fue un militar, estratega y político, conocido como 'El Libertador' de Sudamérica."]
+        },
+        {
+            "tag": "participacion_simon_bolivar",
+            "patterns": ["¿qué hizo Simon Bolivar?", "papel de Bolivar en la independencia", "¿cómo contribuyó Bolivar a la independencia?","como participo simon bolivar"],
+            "responses": ["Simón Bolívar lideró la independencia de Venezuela, Colombia, Ecuador, Perú y Bolivia, luchando contra el dominio español y promoviendo la unión latinoamericana."]
+        },
+        {
+            "tag": "obras_simon_bolivar",
+            "patterns":["obras de Simon Bolivar","que obras escribio Simon Bolivar","obras escritas por Simon Bolivar "],
+            "responses":["Carta de Jamaica (1815): Este documento expone su visión sobre la independencia de América Latina. Discurso de Angostura (1819): Sentó las bases para la organización política de la Gran Colombia, durante su pronunciado en el Congreso de Angostura. Proclamas y decretos: Con su liderazgo, Simón Bolívar escribió varias proclamas dirigidas a los pueblos de América" ]
+        },
+        {
+            "tag": "datos_curiosos_simon_bolivar",
+            "patterns": ["dato curioso sobre Simón Bolívar", "algo interesante sobre Bolívar", "¿qué dato poco conocido hay sobre Bolívar?"],
+            "responses": ["Simón Bolívar no solo fue un gran militar, sino que también escribió importantes documentos políticos, como la 'Carta de Jamaica'."]
+        },
+        {
+            "tag": "relacion_bolivar_manuelita",
+            "patterns": ["¿qué relación tenía Simón Bolívar con Manuelita Saenz?", "¿Bolívar y Manuelita Saenz eran pareja?", "relación entre Bolivar y Manuelita Saenz"],
+            "responses": ["Simón Bolívar y Manuela Sáenz fueron pareja y ella fue su gran aliada en la lucha independentista. Se conocieron en Quito y Manuela se convirtió en su confidente y protectora.", "Manuela Sáenz salvó la vida de Bolívar en 1828 cuando lo alertó sobre un atentado en su contra, permitiéndole escapar."]
         },
         {
             "tag":"antonio_jose_de_sucre",
-            "patterns":["quién fue antonio jose de sucre", "háblame de antonio jose de sucre", "Antonio jose de sucre historia"],
-            "responses":["Antonio José de Sucre fue un militar y líder independentista que desempeñó un papel clave en la independencia de Ecuador, Perú y Bolivia. Fue el gran estratega de la Batalla de Pichincha en 1822.",
-        "Sucre fue un colaborador cercano de Simón Bolívar y se convirtió en el primer presidente de Bolivia. Es recordado por su valentía y su capacidad como estratega militar."]
+            "patterns":["quién fue antonio jose de sucre", "háblame de antonio jose de sucre", "Antonio jose de sucre historia","batalla de Pichincha", "biografía de Antonio José de Sucre", "qué hizo Antonio José de Sucre"],
+            "responses":["Antonio José de Sucre fue un militar y líder independentista nacido el 3 de febrero de 1795 en Cumaná, Venezuela, desempeñando un papel clave en la independencia de Ecuador, Perú y Bolivia. Fue el gran estratega de la Batalla de Pichincha en 1822. Sucre fue un colaborador cercano de Simón Bolívar y se convirtió en el primer presidente de Bolivia. Es recordado por su valentía y su capacidad como estratega militar. Antonio José de Sucre fue asesinado el 4 de junio de 1830 en la selva de Berruecos, Colombia."]
+        },
+        {
+            "tag": "fecha_nacimiento_sucre",
+            "patterns": ["¿cuándo nació Antonio José de Sucre?", "fecha de nacimiento de Sucre", "¿en qué año nació Sucre?"],
+            "responses": ["Antonio José de Sucre nació el 3 de febrero de 1795 en Cumaná, Venezuela."]
+        },
+        {
+            "tag": "batallas_sucre",
+            "patterns":["batallas de sucre","batallas en las que participo sucre","en que batallas participo sucre"],
+            "responses":["Batalla de Pichincha (1822): Gran victoria liderada por Antonio José de Sucre en las faldas del volcán Pichincha. Siendo esta batalla la que aseguró la independencia de Quito y abrió paso a la unión con la Gran Colombia"]
+        },
+        {
+            "tag": "fecha_fallecimiento_sucre",
+            "patterns": ["¿cuándo murió Antonio José de Sucre?", "fecha de fallecimiento de Sucre", "¿en qué año murió Sucre?"],
+            "responses": ["Antonio José de Sucre fue asesinado el 4 de junio de 1830 en la selva de Berruecos, Colombia."]
+        },
+        {
+            "tag": "formacion_sucre",
+            "patterns": ["¿Dónde estudió Antonio José de Sucre?", "Formación académica de Sucre", "¿En qué se formó Sucre?"],
+            "responses": ["Antonio José de Sucre estudió matemáticas y ciencias militares en Venezuela, destacándose en la estrategia militar."]
+        },
+        {
+            "tag": "profesion_sucre",
+            "patterns": ["cuál era la profesión de Antonio José de Sucre?", "qué hacía Sucre?", "ocupación de Sucre"],
+            "responses": ["Antonio José de Sucre fue un militar, político y estratega clave en la independencia sudamericana."]
+        },
+        {
+            "tag": "obras_sucre",
+            "patterns":["que obras escribio Antonio Jose de Sucre","obras escritas por Antonio Jose de Sucre","obras escritas por Sucre"],
+            "responses":["Antonio José de Sucre no fue un escritor, pero dejó cartas y documentos militares, los cuales reflejan su estrategia en la independencia, como su Parte de la Batalla de Ayacucho (1824)"]
+        },
+        {
+            "tag": "participacion_sucre",
+            "patterns": ["¿qué hizo Antonio José de Sucre?", "papel de Sucre en la independencia", "¿cómo contribuyó Sucre a la independencia?"],
+            "responses": ["Antonio José de Sucre fue el principal estratega en la Batalla de Pichincha en 1822, asegurando la independencia de Ecuador."]
+        },
+        {
+            "tag": "datos_curiosos_sucre",
+            "patterns": ["dato curioso sobre Sucre", "algo interesante sobre Sucre", "¿qué dato poco conocido hay sobre Sucre?"],
+            "responses": ["Antonio José de Sucre era conocido por su humildad y fue uno de los líderes más respetados de la independencia sudamericana."]
+        },
+        {
+            "tag": "relacion_sucre_manuelita",
+            "patterns": ["¿qué relación tenía Antonio José de Sucre con Manuela Sáenz?", "¿Sucre y Manuela Sáenz se conocían?", "relación entre Sucre y Manuela Sáenz"],
+            "responses": ["Antonio José de Sucre y Manuela Sáenz se conocían debido a su relación con Bolívar. Aunque no eran cercanos, compartían el mismo objetivo de independencia.", "Manuela Sáenz admiraba a Sucre por su valentía en la batalla y su lealtad a la causa independentista."]
         },
         {
             "tag":"eugenio_espejo",
-            "patterns":["quién fue Eugenio Espejo", "háblame de Eugenio Espejo", "Eugenio Espejo historia"],
-            "responses":["Eugenio Espejo fue un médico, escritor y pensador ecuatoriano del siglo XVIII. Es considerado precursor de la independencia por sus ideas revolucionarias.",
-        "Espejo promovió la educación y la libertad de pensamiento en Quito. Fundó el periódico 'Primicias de la Cultura de Quito'."]
+            "patterns":["quién fue Eugenio Espejo", "háblame de Eugenio Espejo", "Eugenio Espejo historia", "precursor de la independencia", "biografía de Eugenio Espejo", "qué hizo Eugenio Espejo", "datos de Eugenio Espejo"],
+            "responses":["Eugenio Espejo fue un médico, escritor y pensador ecuatoriano del siglo XVIII, nacido el 21 de febrero de 1747 en Quito,Ecuador. Es considerado precursor de la independencia por sus ideas revolucionarias. Espejo promovió la educación y la libertad de pensamiento en Quito. Fundó el periódico 'Primicias de la Cultura de Quito'. Eugenio Espejo falleció el 27 de diciembre de 1795 en Quito, Ecuador."]
+        },
+        {
+            "tag": "fecha_nacimiento_eugenio_espejo",
+            "patterns": ["¿cuándo nació Eugenio Espejo?", "fecha de nacimiento de Eugenio Espejo", "¿en qué año nació Espejo?","cuando nacio Eugenio Espejo","nacimiento Eugenio Espejo","año nacimiento Eugenio Espejo"],
+            "responses": ["Eugenio Espejo nació el 21 de febrero de 1747 en Quito, Ecuador."]
+        },
+        {
+            "tag": "batallas_eugenio_espejo",
+            "patterns":["batallas de eugenio espejo","en que batallas participo Eugenio Espejo","batallas en las que participo eugenio espejo"],
+            "responses":["Eugenio Espejo no participó en batallas militares, pero sí luchó por sus ideas y escritos por la independencia del Ecuador. Su contribución fue intelectual y política, preparando el camino para la emanciáción. Si quieres saber más sobre sus acciones revolucionarias, sera un gusto ayudarte."]
+        },
+        {
+            "tag": "revolucionarias_eugenio_espejo",
+            "patterns":["cuales fueron las principales acciones revolucionarias de eugenio espejo","acciones revolucionarias eugenio espejo","acciones eugenio espejo","revolucion de eugenio espejo","acciones de eugenio espejo"],
+            "responses":["Fundación del periódico Primicias de la Cultura de Quito (1792): Fue el primer periódico de Ecuador y promovió ideas ilustradas y libertarias, donde criticó la opresión española y la falta de educación. Escritos clandestinos: Difundió ideas revolucionarias entre criollos y mestizos, además atacó la corrupción del poder colonial. Organización de grupos independentistas como: Sociedades secretas (1790 - 1795): Inspiró la formación de tertulias políticas donde se debatía sobre independencia, a su vez influyendo en los líderes del Primer Grito de Independencia en 1809. Red de conspiración: Eugenio Espejo se reunió con criollos y patriotas que más tarde iniciarían el proceso independentista." ]
+        },
+        {
+            "tag": "fecha_fallecimiento_eugenio_espejo",
+            "patterns": ["¿cuándo murió Eugenio Espejo?", "fecha de fallecimiento de Eugenio Espejo", "¿en qué año murió Espejo?"],
+            "responses": ["Eugenio Espejo falleció el 27 de diciembre de 1795 en Quito, Ecuador."]
+        },
+        {
+            "tag": "formacion_eugenio_espejo",
+            "patterns": ["¿dónde estudió Eugenio Espejo?", "educación de Eugenio Espejo", "formación académica de Espejo"],
+            "responses": ["Eugenio Espejo estudió medicina en la Universidad de San Gregorio Magno en Quito."]
+        },
+        {
+            "tag": "profesion_espejo",
+            "patterns": ["cuál era la profesión de Eugenio Espejo?", "qué hacía Espejo?", "ocupación de Espejo"],
+            "responses": ["Eugenio Espejo fue médico, escritor, periodista y precursor de la independencia del Ecuador."]
+        },
+        {
+            "tag": "datos_curiosos_eugenio_espejo",
+            "patterns": ["curiosidades sobre Eugenio Espejo", "datos curiosos de Espejo", "cosas interesantes sobre Espejo"],
+            "responses": ["Fue el primer periodista de Ecuador y fundó el periódico 'Primicias de la Cultura de Quito'.", "Criticó duramente la corrupción de la época y promovió la educación y la higiene pública.", "Se le considera precursor de la independencia ecuatoriana por sus ideas revolucionarias."]
+        },
+        {
+            "tag": "obras_eugenio_espejo",
+            "patterns": ["obras de Eugenio Espejo","obras escritas por Eugenio Espejo","que obras escribio Eugenio Espejo"],
+            "responses":["Primicias de la Cultura de Quito (1792): Es el nombre del primer periódico impreso de Ecuador, con el cual se difundió ideas de revolución y libertad. Reflexiones sobre las viruelas (1785): Un estudio realizado sobre la propagación y prevención de la viruela. MArco Porcio Catón (1789): Obra satírica contra la corrupción y la opresión durante la Real Audiencia de Quito"]
+        },
+        {
+            "tag": "relacion_espejo_bolivar",
+            "patterns": ["¿qué relación tenía Eugenio Espejo con Simón Bolivar?", "¿Eugenio Espejo influyó en Bolivar?", "relación entre Espejo y Bolivar"],
+            "responses": ["Eugenio Espejo murió antes de que Bolívar iniciara sus campañas, pero sus ideas influyeron en el pensamiento independentista en Quito, lo que contribuyó a la lucha de Bolívar.", "Aunque no se conocieron personalmente, Bolívar fue influenciado por las ideas de libertad y educación que Espejo promovió en Quito."]
+        },
+        {
+            "tag": "relacion_espejo_manuelita",
+            "patterns": ["¿qué relación tenía Eugenio Espejo con Manuelita Saenz?", "¿Espejo y Manuela Saenz se conocían?", "relación entre Espejo y Manuelita Saenz"],
+            "responses": ["Eugenio Espejo y Manuelita Sáenz no se conocieron, pero ambos compartían un fuerte ideal independentista.", "Las ideas de Espejo sobre la educación y la libertad influyeron en las futuras generaciones, incluyendo a luchadores por la independencia como Manuela Sáenz."]
         },
         {
             "tag":"manuelita_saenz",
-            "patterns":["quién fue Manuelita Saenz", "háblame de Manuelita Saenz", "Manuelita Saenz historia"],
-            "responses":["Manuela Sáenz fue una patriota ecuatoriana y una de las figuras más destacadas de la independencia sudamericana. Fue una aliada clave de Simón Bolívar, a quien salvó de un atentado en 1828.",
-        "Se le conoce como 'La Libertadora del Libertador' por su papel en la lucha independentista. Además de su relación con Bolívar, participó activamente en las campañas militares y políticas."]
+            "patterns":["quién fue Manuelita Saenz", "háblame de Manuelita Saenz", "Manuelita Saenz historia", "La Libertadora del Libertador", "biografía de Manuelita Saenz", "qué hizo Manuelita Sáenz", "datos de Manuelita Saenz"],
+            "responses":["Manuelita Sáenz fue una patriota ecuatoriana y una de las figuras más destacadas de la independencia sudamericana nacida el 27 de diciembre de 1797 en Quito,Ecuador. Fue una aliada clave de Simón Bolívar, a quien salvó de un atentado en 1828. Se le conoce como 'La Libertadora del Libertador' por su papel en la lucha independentista. Además de su relación con Bolívar, participó activamente en las campañas militares y políticas. Manuelita Sáenz falleció el 23 de noviembre de 1856 en Paita, Perú."]
+        },
+        {
+            "tag": "fecha_nacimiento_manuelita_saenz",
+            "patterns": ["¿cuándo nació Manuela Saenz?", "fecha de nacimiento de Manuela Saenz", "¿en qué año nació Manuela Saenz?","cuando nació Manuelita Saenz","fecha de nacimiento Manuelita Saenz","año de nacimiento de Manuelita Saenz"],
+            "responses": ["Manuela Sáenz nació el 27 de diciembre de 1797 en Quito, Ecuador."]
+        },
+        {
+            "tag":"batallas_manuelita_saenz",
+            "patterns":["en que batallas participo manuelita saenz","batallas manuelita saenz","batallas de manuelita saenz","en que batallas participo manuela saenz","batallas manuela saenz","batallas de manuela saenz"],
+            "responses":["Manuelita Sáenz no participó directamente en batallas como combatiente, pero su papel en la independencia fue clave, gracias a su apoyo logístico, estratégico y político. Si te gustaría saber más sobre las principales acciones de Manuelita Sáenz en  la independencia, con gusto te ayudaré."]
+        },
+        {
+            "tag": "acciones_manuelita_saenz",
+            "patterns":["acciones de manuelita saenz","cuales fueron las principales acciones de manuelita saenz","independecia manuelita saenz","acciones de manuela saenz","cuales fueron las principales acciones de manuela saenz","independecia manuela saenz"],
+            "responses":["Desde 1822, colaboró con los patriotas, recolectando información sobre los realistas, siendo espía y mensajera de Simón Bolívar y apoyó recaundando fondos y provisiones para las tropas independentistas. Batalla de Pichincha (1822): Apoyó en la logística y celebró la victoria patriota en Quito, después de la batalla, conoció a Simón Bolívar. Campaña del Sur (1823 - 1825): Acompaño a Simón Bolívar y su ejército en la liberación de Perú y Bolivia, por lo cual fue reconocida como CAballeresa del Sol por su gran valentía."]
+        },
+        {
+            "tag": "fecha_fallecimiento_manuelita_saenz",
+            "patterns": ["¿cuándo murió Manuela Saenz?", "fecha de fallecimiento de Manuela Saenz", "¿en qué año murió Manuela Saenz?","cuando murio Manuelita Saenz","fallecimiento Manuelita Espejo","¿cuándo murió Manuelita Saenz?", "fecha de fallecimiento de Manuelita Saenz", "¿en qué año murió Manuelita Saenz?"],
+            "responses": ["Manuelita Sáenz falleció el 23 de noviembre de 1856 en Paita, Perú."]
+        },
+        {
+            "tag": "formacion_manuelita",
+            "patterns": ["¿Dónde estudió Manuela Sáenz?", "Formación académica de Manuela Sáenz", "¿En qué se formó Manuela Sáenz?","formación Manuelita Saenz","¿Dónde estudio Manuelita Saenz?", "Formación académica de Manuelita Saenz", "¿En qué se formó Manuelita Saenz?"],
+            "responses": ["Manuelita Sáenz recibió educación en un convento en Quito y luego continuó su formación en política y estrategia militar a lo largo de su vida."]
+        },
+        {
+            "tag": "profesion_manuelita",
+            "patterns": ["cuál era la profesión de Manuela Sáenz?", "qué hacía Manuela Sáenz?", "ocupación de Manuela Sáenz","profesion de Manuelita Saenz","cuál era la profesión de Manuelita Saenz?", "qué hacía Manuelita Saenz?", "ocupación de Manuelita Saenz"],
+            "responses": ["Manuelita Sáenz fue patriota y activista política, conocida como 'La Libertadora del Libertador'."]
+        },
+        {
+            "tag":"obras_manuelita_saenz",
+            "patterns":["obras de Manuelita Saenz","que obras escribio Manuelita Saenz","obras escritas por Manuelita Saenz","obras de Manuela Saenz","que obras escribio Manuela Saenz","obras escritas por Manuela Saenz"],
+            "responses":["Manuelita Saenz no dejó libros, pero escribió cartas y memorias relatando si participación en la independencia y su relación con Simon Bolívar. "]
+        },
+        {
+            "tag": "participacion_manuelita_saenz",
+            "patterns": ["¿qué hizo Manuela Saenz?", "papel de Manuela Saenz en la independencia", "¿cómo contribuyó Manuela Sáenz a la independencia?","participación de Manuelita saenz","¿qué hizo Manuelita Saenz?", "papel de Manuelita Saenz en la independencia", "¿cómo contribuyó Manuelita Saenz a la independencia?"],
+            "responses": ["Manuelita Sáenz fue una patriota ecuatoriana, aliada de Simón Bolívar y jugó un papel crucial en la independencia de Sudamérica."]
+        },
+        {
+            "tag": "datos_curiosos_manuelita_saenz",
+            "patterns": ["curiosidades sobre Manuela Saenz", "datos curiosos de Manuela Saenz", "cosas interesantes sobre Manuela Saenz","curiosidades sobre Manuelita Saenz", "datos curiosos de Manuelita Saenz", "cosas interesantes sobre Manuelita Saenz"],
+            "responses": ["Se le conoce como 'La Libertadora del Libertador' por haber salvado la vida de Simón Bolívar.", "Fue una de las primeras mujeres en luchar activamente por la independencia.", "En sus últimos años, vivió en el exilio y vendía dulces para subsistir en Perú."]
         }
     ]
 }
